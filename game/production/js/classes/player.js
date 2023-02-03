@@ -21,17 +21,28 @@ class Player {
       right: this.position.x - this.width,
     };
     this.movement = {
-      jumpHeight: -18,
-      moveSpeed: 10,
+      jumpHeight: -19,
+      moveSpeed: 12,
+      jumping: {
+        maxJumps: 2,
+        usedJumps: 0,
+      },
     };
   }
 
   draw() {
-    c.fillStyle = '#cfc';
+    c.fillStyle = "#cfc";
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
   jump() {
     if (this.velocity.y === 0 && this.velocity.prevVel >= 0) {
+      this.movement.jumping.usedJumps = 0;
+    }
+    if (
+      (this.velocity.y === 0 && this.velocity.prevVel >= 0) ||
+      this.movement.jumping.usedJumps < this.movement.jumping.maxJumps
+    ) {
+      this.movement.jumping.usedJumps += 1;
       this.velocity.y = this.movement.jumpHeight;
     }
   }

@@ -1,5 +1,5 @@
-const gameArea = document.querySelector('#game-area');
-const c = gameArea.getContext('2d');
+const gameArea = document.querySelector("#game-area");
+const c = gameArea.getContext("2d");
 gameArea.width = window.innerWidth;
 gameArea.height = window.innerHeight;
 
@@ -18,11 +18,11 @@ const keys = {
 
 //plaform x,y,width,height
 const MainPlatformDim = {
-  width: 820,
-  height: 50,
+  width: 1230,
+  height: 360,
   pos: {
-    x: window.innerWidth / 2 - 800 / 2 + 5,
-    y: window.innerHeight - 270,
+    x: window.innerWidth / 2 - 1200 / 2,
+    y: window.innerHeight / 1.75,
   },
 };
 const mainPlatform = new Platform(
@@ -30,40 +30,40 @@ const mainPlatform = new Platform(
   MainPlatformDim.pos.y,
   MainPlatformDim.width,
   MainPlatformDim.height,
-  platformSprite
+  groundSprite
 );
 
 const leftPlatform = new Platform(
-  MainPlatformDim.pos.x + 80,
+  MainPlatformDim.pos.x + MainPlatformDim.width / 8,
   MainPlatformDim.pos.y - 140,
-  150,
-  MainPlatformDim.height / 2,
+  200,
+  25,
   platformSprite
 );
 
 const rightPlatform = new Platform(
   MainPlatformDim.pos.x +
     MainPlatformDim.width -
-    MainPlatformDim.width / 4 -
-    40,
+    MainPlatformDim.width / 8 -
+    200,
   MainPlatformDim.pos.y - 140,
-  150,
-  MainPlatformDim.height / 2,
+  200,
+  25,
   platformSprite
 );
 const centerPlatform = new Platform(
-  window.innerWidth / 2 - 200 / 2 + 5,
-  MainPlatformDim.pos.y - 275,
-  200,
-  MainPlatformDim.height / 2,
+  window.innerWidth / 2 - 225 / 2 + 5,
+  MainPlatformDim.pos.y - 315,
+  225,
+  25,
   platformSprite
 );
 let platforms = [mainPlatform, leftPlatform, rightPlatform, centerPlatform];
 
 //player, width,height,x,y
 const player = new Player(
-  30,
-  50,
+  40,
+  60,
   MainPlatformDim.pos.x,
   MainPlatformDim.pos.y - 100
 );
@@ -71,7 +71,7 @@ const player = new Player(
 (function Update() {
   window.requestAnimationFrame(Update);
   c.clearRect(0, 0, gameArea.width, gameArea.height);
-  c.fillStyle = '#333';
+  c.fillStyle = "transparent";
   c.fillRect(0, 0, gameArea.width, gameArea.height);
 
   player.draw();
@@ -83,37 +83,37 @@ const player = new Player(
     platform.checkCol();
   });
 })();
-window.addEventListener('keydown', (e) => {
+window.addEventListener("keydown", (e) => {
   let key = e.code;
   switch (key) {
-    case 'Space':
+    case "Space":
       player.jump();
 
       break;
-    case 'KeyW':
+    case "KeyW":
       player.jump();
 
       break;
-    case 'KeyD':
+    case "KeyD":
       keys.right.pressed = true;
 
       break;
 
-    case 'KeyA':
+    case "KeyA":
       keys.left.pressed = true;
 
       break;
   }
 });
-window.addEventListener('keyup', (e) => {
+window.addEventListener("keyup", (e) => {
   let key = e.code;
   switch (key) {
-    case 'KeyD':
+    case "KeyD":
       keys.right.pressed = false;
 
       break;
 
-    case 'KeyA':
+    case "KeyA":
       keys.left.pressed = false;
 
       break;
