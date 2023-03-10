@@ -1,16 +1,25 @@
-const gameArea = document.querySelector("#game-area");
-const c = gameArea.getContext("2d");
+//TODO: add ability to go down a platform
+//add a second player
+//add class inheritance for weights of characters
+//make extremely scalable to make maps easier
+const gameArea = document.querySelector('#game-area');
+const c = gameArea.getContext('2d');
 gameArea.width = window.innerWidth;
 gameArea.height = window.innerHeight;
 
 let x = 100;
 let y = 100;
 
+//make for player one
+//make a se
 const keys = {
   right: {
     pressed: false,
   },
   left: {
+    pressed: false,
+  },
+  down: {
     pressed: false,
   },
 };
@@ -25,7 +34,7 @@ const MainPlatformDim = {
     y: window.innerHeight / 1.75,
   },
 };
-const mainPlatform = new Platform(
+const mainPlatform = new stagePlatform(
   MainPlatformDim.pos.x,
   MainPlatformDim.pos.y,
   MainPlatformDim.width,
@@ -71,7 +80,7 @@ const player = new Player(
 (function Update() {
   window.requestAnimationFrame(Update);
   c.clearRect(0, 0, gameArea.width, gameArea.height);
-  c.fillStyle = "transparent";
+  c.fillStyle = 'transparent';
   c.fillRect(0, 0, gameArea.width, gameArea.height);
 
   player.draw();
@@ -82,40 +91,47 @@ const player = new Player(
     platform.draw();
     platform.checkCol();
   });
+  mainPlatform.checkFullCol();
 })();
-window.addEventListener("keydown", (e) => {
+window.addEventListener('keydown', (e) => {
   let key = e.code;
   switch (key) {
-    case "Space":
+    case 'Space':
       player.jump();
 
       break;
-    case "KeyW":
+    case 'KeyW':
       player.jump();
 
       break;
-    case "KeyD":
+    case 'KeyD':
       keys.right.pressed = true;
 
       break;
 
-    case "KeyA":
+    case 'KeyA':
       keys.left.pressed = true;
 
       break;
+    case 'KeyS':
+      keys.down.pressed = true;
+      break;
   }
 });
-window.addEventListener("keyup", (e) => {
+window.addEventListener('keyup', (e) => {
   let key = e.code;
   switch (key) {
-    case "KeyD":
+    case 'KeyD':
       keys.right.pressed = false;
 
       break;
 
-    case "KeyA":
+    case 'KeyA':
       keys.left.pressed = false;
 
+      break;
+    case 'KeyS':
+      keys.down.pressed = true;
       break;
   }
 });

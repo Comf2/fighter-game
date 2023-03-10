@@ -1,11 +1,22 @@
+//make a big platform class, it will override the check col method
+//add collision to every single side, and always be running
+//it will toggle
 class Platform {
   constructor(x, y, width, height, sprite) {
     this.position = {
       x: x,
       y: y,
     };
-    (this.sprite = sprite), (this.width = width);
-    this.height = height;
+    //up makes value less
+    (this.sprite = sprite),
+      (this.width = width),
+      (this.height = height),
+      (this.sides = {
+        top: this.position.y,
+        bottom: this.position.y + this.height,
+        left: this.position.x,
+        right: this.position.x - this.width,
+      });
   }
   draw() {
     c.fillStyle = 'transparent';
@@ -19,7 +30,8 @@ class Platform {
     );
   }
   checkCol() {
-    if (
+    if (keys.down.pressed === true) return;
+    else if (
       player.sides.bottom <= this.position.y &&
       player.sides.bottom + player.velocity.y >= this.position.y &&
       player.sides.left >= this.position.x &&
@@ -27,5 +39,20 @@ class Platform {
     ) {
       player.velocity.y = 0;
     }
+  }
+}
+
+//adds collision to every side of the platform,
+//makes it untogglable
+class stagePlatform extends Platform {
+  //checks collision of all sides of the platform
+  //besides top col
+  checkFullCol() {
+    //vertical col
+    //check if the players x position is within the main platform
+
+    //checking left col 
+    if
+
   }
 }

@@ -31,7 +31,7 @@ class Player {
   }
 
   draw() {
-    c.fillStyle = "#cfc";
+    c.fillStyle = '#cfc';
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
   jump() {
