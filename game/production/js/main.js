@@ -1,7 +1,10 @@
-//TODO: add ability to go down a platform
 //add a second player
 //add class inheritance for weights of characters
 //make extremely scalable to make maps easier
+//make character sprites
+//make scalable to make a main menu
+//make a main menu canvas
+//make a function to init the game, passing in the selected map
 const gameArea = document.querySelector('#game-area');
 const c = gameArea.getContext('2d');
 gameArea.width = window.innerWidth;
@@ -39,7 +42,7 @@ const mainPlatform = new stagePlatform(
   MainPlatformDim.pos.y,
   MainPlatformDim.width,
   MainPlatformDim.height,
-  groundSprite
+  dreamlandGroundSprite
 );
 
 const leftPlatform = new Platform(
@@ -47,7 +50,7 @@ const leftPlatform = new Platform(
   MainPlatformDim.pos.y - 140,
   200,
   25,
-  platformSprite
+  dreamlandPlatformSprite
 );
 
 const rightPlatform = new Platform(
@@ -58,14 +61,14 @@ const rightPlatform = new Platform(
   MainPlatformDim.pos.y - 140,
   200,
   25,
-  platformSprite
+  dreamlandPlatformSprite
 );
 const centerPlatform = new Platform(
   window.innerWidth / 2 - 225 / 2 + 5,
   MainPlatformDim.pos.y - 315,
   225,
   25,
-  platformSprite
+  dreamlandPlatformSprite
 );
 let platforms = [mainPlatform, leftPlatform, rightPlatform, centerPlatform];
 
@@ -131,10 +134,8 @@ window.addEventListener('keyup', (e) => {
 
       break;
     case 'KeyS':
-      keys.down.pressed = true;
+      keys.down.pressed = false;
       break;
   }
 });
 console.log(keys.left.pressed);
-
-platformSprite.onload = () => {};

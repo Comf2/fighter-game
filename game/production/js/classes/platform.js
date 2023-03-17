@@ -15,7 +15,7 @@ class Platform {
         top: this.position.y,
         bottom: this.position.y + this.height,
         left: this.position.x,
-        right: this.position.x - this.width,
+        right: this.position.x + this.width,
       });
   }
   draw() {
@@ -47,12 +47,37 @@ class Platform {
 class stagePlatform extends Platform {
   //checks collision of all sides of the platform
   //besides top col
+  checkCol() {
+    if (
+      player.sides.bottom <= this.position.y &&
+      player.sides.bottom + player.velocity.y >= this.position.y &&
+      player.sides.left >= this.position.x &&
+      player.position.x <= this.position.x + this.width
+    ) {
+      player.velocity.y = 0;
+    }
+  }
   checkFullCol() {
     //vertical col
     //check if the players x position is within the main platform
 
-    //checking left col 
-    if
-
+    //checking left col
+    if (
+      player.sides.right >= this.sides.left &&
+      player.sides.bottom + player.velocity.y <= this.sides.bottom &&
+      player.sides.top + player.velocity.y >= this.sides.top &&
+      player.sides.left <= this.sides.right
+    ) {
+      player.position.x -= player.velocity.x;
+      player.velocity.x = 0;
+    } else if (
+      player.sides.top + player.velocity.y <= this.sides.bottom &&
+      player.sides.bottom >= this.sides.top &&
+      player.sides.right >= this.sides.left &&
+      player.sides.left <= this.sides.right
+    ) {
+      player.velocity.y = 0;
+      player.velocity.y += 3;
+    }
   }
 }

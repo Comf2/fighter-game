@@ -1,11 +1,12 @@
-const platformSpriteURL = "./production/assets/images/dreamland-platform.png";
-let platformSprite = new Image();
+const dreamlandPlatformSpriteURL =
+  './production/assets/images/dreamland-platform.png';
+let dreamlandPlatformSprite = new Image();
 
-platformSprite.src = platformSpriteURL;
-platformSprite.crossOrigin = true;
+dreamlandPlatformSprite.src = dreamlandPlatformSpriteURL;
+dreamlandPlatformSprite.crossOrigin = true;
 
-const groundSpriteURl = "./production/assets/images/main-ground.png";
-let groundSprite = new Image();
+const dreamlandGroundSpriteURl = './production/assets/images/main-ground.png';
+let dreamlandGroundSprite = new Image();
 
-groundSprite.src = groundSpriteURl;
-groundSprite.crossOrigin = true;
+dreamlandGroundSprite.src = dreamlandGroundSpriteURl;
+dreamlandGroundSprite.crossOrigin = true;

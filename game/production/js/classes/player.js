@@ -7,7 +7,6 @@ class Player {
       x: x,
       y: y,
     };
-
     this.velocity = {
       x: 0,
       y: 0,
@@ -15,10 +14,10 @@ class Player {
     };
 
     this.sides = {
-      top: this.position.y - this.height,
+      top: this.position.y,
       bottom: this.position.y + this.height,
-      left: this.position.x + this.width,
-      right: this.position.x - this.width,
+      left: this.position.x,
+      right: this.position.x + this.width,
     };
     this.movement = {
       jumpHeight: -19,
@@ -66,10 +65,10 @@ class Player {
     this.position.y += this.velocity.y;
 
     //updates side values
-    this.sides.top = this.position.y - this.height;
+    this.sides.top = this.position.y;
     this.sides.bottom = this.position.y + this.height;
-    this.sides.left = this.position.x + this.width;
-    this.sides.right = this.position.x - this.width;
+    this.sides.left = this.position.x;
+    this.sides.right = this.position.x + this.width;
 
     if (this.sides.bottom + this.velocity.y < gameArea.height) {
       this.velocity.y++;
