@@ -58,10 +58,8 @@ class stagePlatform extends Platform {
     }
   }
   checkFullCol() {
-    //vertical col
-    //check if the players x position is within the main platform
 
-    //checking left col
+    //checking hori col
     if (
       player.sides.right >= this.sides.left &&
       player.sides.bottom + player.velocity.y <= this.sides.bottom &&
@@ -70,7 +68,9 @@ class stagePlatform extends Platform {
     ) {
       player.position.x -= player.velocity.x;
       player.velocity.x = 0;
-    } else if (
+    }
+    //checking vert collision 
+    else if (
       player.sides.top + player.velocity.y <= this.sides.bottom &&
       player.sides.bottom >= this.sides.top &&
       player.sides.right >= this.sides.left &&
