@@ -4,7 +4,6 @@
 //make character sprites
 //make scalable to make a main menu
 //make a main menu canvas
-//make a function to init the game, passing in the selected map
 const gameArea = document.querySelector('#game-area');
 const c = gameArea.getContext('2d');
 gameArea.width = window.innerWidth;
@@ -12,6 +11,36 @@ gameArea.height = window.innerHeight;
 
 let x = 100;
 let y = 100;
+
+//TODO: Refactor to a stages file
+
+//changes values based on this current stage
+const stageTypes = {
+  menu: 'menu',
+  battle: 'battle',
+};
+
+const stages = [
+  {
+    name: 'mainMenu',
+    background: mainMenuBackgroundSprite,
+    type: stageTypes.menu,
+    music: [],
+  },
+  {
+    name: 'selectStage',
+    background: mainMenuBackgroundSprite,
+    type: stageTypes.menu,
+    music: [],
+  },
+  {
+    name: 'dreamland',
+    background: dreamlandBackgroundSprite,
+    type: stageTypes.battle,
+    music: [],
+  },
+];
+let currentStage = stages[0];
 
 //make for player one
 //make a se
@@ -86,16 +115,35 @@ const player = new Player(
   c.fillStyle = 'transparent';
   c.fillRect(0, 0, gameArea.width, gameArea.height);
 
-  player.draw();
-  player.update();
-  player.move();
+  checkCurrentStage(c);
+  if (currentStage.type === stageTypes.battle) {
+    player.draw();
+    player.update();
+    player.move();
 
-  platforms.forEach((platform) => {
-    platform.draw();
-    platform.checkCol();
-  });
-  mainPlatform.checkFullCol();
+    platforms.forEach((platform) => {
+      platform.draw();
+      platform.checkCol();
+    });
+    mainPlatform.checkFullCol();
+  } else if (currentStage.type === stageTypes.menu) {
+    checkMenu(currentStage);
+  }
 })();
+
+function checkCurrentStage(c) {
+  for (let i = 0; i < stages.length; i++) {
+    const stage = stages[i];
+
+    if (stage.name === currentStage.name) {
+      //configure backgruond
+      c.drawImage(stage.background, 0, 0, gameArea.width, gameArea.height);
+      //configure based on stage type
+      currentStage.type = stage.type;
+    }
+  }
+}
+
 window.addEventListener('keydown', (e) => {
   let key = e.code;
   switch (key) {
