@@ -41,6 +41,12 @@ const stages = [
   },
 ];
 let currentStage = stages[0];
+let currentStageButtons = [];
+
+let currentRayPos = {
+  x: 0,
+  y: 0,
+};
 
 //make for player one
 //make a se
@@ -146,27 +152,67 @@ function checkCurrentStage(c) {
 
 window.addEventListener('keydown', (e) => {
   let key = e.code;
-  switch (key) {
-    case 'Space':
-      player.jump();
+  if (currentStage.type === stageTypes.battle) {
+    switch (key) {
+      case 'Space':
+        player.jump();
 
-      break;
-    case 'KeyW':
-      player.jump();
+        break;
+      case 'KeyW':
+        player.jump();
 
-      break;
-    case 'KeyD':
-      keys.right.pressed = true;
+        break;
+      case 'KeyD':
+        keys.right.pressed = true;
 
-      break;
+        break;
 
-    case 'KeyA':
-      keys.left.pressed = true;
+      case 'KeyA':
+        keys.left.pressed = true;
 
-      break;
-    case 'KeyS':
-      keys.down.pressed = true;
-      break;
+        break;
+      case 'KeyS':
+        keys.down.pressed = true;
+        break;
+    }
+  } else if (currentStage.type === stageTypes.menu) {
+    if (key === 'KeyW' || key === 'ArrowUp') {
+      const ray = new Raycast(
+        'up',
+        currentRayPos.x,
+        currentRayPos.y,
+        window.innerHeight - currentRayPos.y,
+        'button'
+      );
+      ray.fire();
+    } else if (key === 'KeyD' || key === 'ArrowRight') {
+      const ray = new Raycast(
+        'right',
+        currentRayPos.x,
+        currentRayPos.y,
+        window.innerWidth - currentRayPos.x,
+        'button'
+      );
+      ray.fire();
+    } else if (key === 'KeyS' || key === 'ArrowDown') {
+      const ray = new Raycast(
+        'down',
+        currentRayPos.x,
+        currentRayPos.y,
+        window.innerHeight - currentRayPos.y,
+        'button'
+      );
+      ray.fire();
+    } else if (key === 'KeyA' || key === 'ArrowLeft') {
+      const ray = new Raycast(
+        'left',
+        currentRayPos.x,
+        currentRayPos.y,
+        window.innerWidth - currentRayPos.x,
+        'button'
+      );
+      ray.fire();
+    }
   }
 });
 window.addEventListener('keyup', (e) => {
