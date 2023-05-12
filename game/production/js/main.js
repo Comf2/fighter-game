@@ -28,7 +28,7 @@ const stages = [
     music: [],
   },
   {
-    name: 'selectStage',
+    name: 'selectMode',
     background: mainMenuBackgroundSprite,
     type: stageTypes.menu,
     music: [],

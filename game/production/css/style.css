@@ -9,3 +9,6 @@ body{
     align-items: center;
     background-size: cover;
 }
+canvas {
+    image-rendering: pixelated;
+}
